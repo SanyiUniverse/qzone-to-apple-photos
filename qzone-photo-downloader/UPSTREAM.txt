@@ -1,0 +1,11 @@
+Project: https://github.com/dslwind/qzone-photo-downloader
+Commit: b008737cd439424e7a1abaaf938c38c24ebc219a
+License: MIT; original LICENSE retained in this directory.
+Original core.py SHA256: 7fc7e50cd51cbe25a33379b6f4f04cc2cccd3bcf80ca9881cd993f54fa158468
+Unmodified source: retrieve core.py at the pinned upstream commit.
+Local changes to core.py:
+- Use normal Chrome sandbox and omit automation-masking configuration/call.
+- Remove login cookie/token debug output.
+- Optional raw_response_hook receives response text only, before JSON parsing.
+- Video lookup must match the requested picKey/lloc; no first-video fallback.
+Migration adapter: ../migrate_session.py
