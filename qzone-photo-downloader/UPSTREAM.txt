@@ -8,4 +8,7 @@ Local changes to core.py:
 - Remove login cookie/token debug output.
 - Optional raw_response_hook receives response text only, before JSON parsing.
 - Video lookup must match the requested picKey/lloc; no first-video fallback.
+- Remove unused configuration loading, GUI callbacks, cookie injection/checking,
+  anti-detection implementation, in-place EXIF writing and alternate bulk download.
+- Keep the login, album/photo API parsing and raw network download used by adapters.
 Migration adapter: ../migrate_session.py

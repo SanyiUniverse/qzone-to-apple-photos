@@ -8,7 +8,7 @@
 - 审计及适配基线：[`b008737cd439424e7a1abaaf938c38c24ebc219a`](https://github.com/dslwind/qzone-photo-downloader/tree/b008737cd439424e7a1abaaf938c38c24ebc219a)
 - 上游许可证：[MIT](https://github.com/dslwind/qzone-photo-downloader/blob/b008737cd439424e7a1abaaf938c38c24ebc219a/LICENSE)
 - 复用范围：`QzonePhotoManager` 的网页登录、相册／列表／详情 API，`QzonePhoto` 数据结构与 `download_photo_network_helper` 下载函数，以及 QQ 日期字段解析思路。原项目的完整 GUI 没有作为运行依赖。
-- 适配：移除浏览器 `--no-sandbox` 和自动检测伪装调用；关闭含凭据的调试输出；添加仅记录响应正文的私有取证钩子；视频详情严格匹配同一项目，不回退为邻居视频或封面。最小会话／批量协调代码复用上述函数，隔离原位 EXIF 写入，保存未经修改原件，再交由 ExifTool 修复副本。
+- 适配：移除浏览器 `--no-sandbox`、未使用的自动检测伪装和含凭据调试分支；添加仅记录响应正文的私有取证钩子；视频详情严格匹配同一项目，不回退为邻居视频或封面。删除未使用的配置读取、GUI 回调、Cookie 注入／探测、原位 EXIF 写入和另一套批量下载流程；最小会话／批量协调代码复用保留的函数，保存未经修改原件，再交由 ExifTool 修复副本。
 - 分发的上游文件保留在 `qzone-photo-downloader/`，保留原始许可证和提交来源。下列原始许可文本同样适用于包含其代码的适配部分；不能把适配后的文件称为完全未经修改的上游文件。
 
 ```text
@@ -49,7 +49,7 @@ SOFTWARE.
 - [ExifTool](https://exiftool.org/)：外部元数据检查和修复工具，由 Phil Harvey 等维护；本仓库不重新许可或打包它。安装时遵守其发布包附带的许可。
 - Apple Photos、AppleScript/JXA 和 macOS：使用系统原生接口与官方文档；不是本项目分发的软件组件。
 
-运行依赖由 [requirements.txt](requirements.txt) 固定，包括 Selenium、Requests、webdriver-manager、piexif 和 json-repair。`piexif` 是复用上游核心所需的依赖；本迁移的下载路径不调用它原位改写下载件。ExifTool 单独安装，不由 Python 依赖代装；Photos 和 `osascript` 由 macOS 提供。
+运行依赖由 [requirements.txt](requirements.txt) 固定：Selenium、Requests、webdriver-manager 和 json-repair。ExifTool 单独安装，用于副本元数据检查和修复；Photos 和 `osascript` 由 macOS 提供。
 
 QQ 来源清理默认关闭，仅在用户明确授权和当前账号回收语义核对后启用。已验证的本机流程包含图片及视频，但不保证平台未来版本或其他账号的接口与恢复行为相同。本项目与腾讯或 Apple 无官方隶属关系。
 

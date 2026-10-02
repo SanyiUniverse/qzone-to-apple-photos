@@ -2,7 +2,6 @@
 """Synthetic cleanup checks. Never opens Photos, logs in, or contacts QQ."""
 import contextlib
 import datetime as dt
-import json
 from pathlib import Path
 import sys
 import tempfile

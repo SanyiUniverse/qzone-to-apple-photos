@@ -1,12 +1,12 @@
 """Offline coordinator: reuse saved QQ inventory, cached video URLs and upstream download code."""
 import argparse
-import hashlib
 import json
 import sys
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import migrate_session as migration
+from collect import choose_detail
 
 
 class OfflineSession(migration.Session):
@@ -60,9 +60,7 @@ def main():
                and not session.validated_record(*key, update=False)]
     if args.missing_details:
         if missing:
-            remaining = set(missing)
-            groups = {album: [key for key in session.index if key[0] == album] for album, _ in missing}
-            key = max(missing, key=lambda key: sum(k in remaining for k in groups[key[0]][max(0, groups[key[0]].index(key)-9):groups[key[0]].index(key)+19]))
+            key = choose_detail(session.index, set(missing))
             command = json.dumps(dict(cmd="detail", album_id=key[0], pic_key=key[1]), ensure_ascii=False)
             if len(command.encode()) >= 900:
                 raise RuntimeError("DETAIL_COMMAND_TOO_LONG")

@@ -14,7 +14,7 @@ import subprocess
 import sys
 import tempfile
 
-from media_utils import OUT, RECORDS, ROOT, TZ, metadata, sha
+from media_utils import OUT, RECORDS, TZ, metadata, sha
 
 VERSION = 1
 ZERO = '0000:00:00 00:00:00'

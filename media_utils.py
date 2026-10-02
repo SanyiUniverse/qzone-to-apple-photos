@@ -5,7 +5,6 @@ import json
 from pathlib import Path
 import subprocess
 from migrate_session import OUT
-ROOT = OUT
 RECORDS = OUT / '迁移记录'
 TZ = dt.timezone(dt.timedelta(hours=8))
 

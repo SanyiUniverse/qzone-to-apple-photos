@@ -23,8 +23,6 @@ if OUT.is_relative_to(HERE):
     raise ValueError("QZONE_MIGRATION_OUTPUT must be outside the public source checkout")
 core.logger.disabled = True
 logging.getLogger("urllib3").setLevel(logging.CRITICAL)
-core.APP_CONFIG.update(is_api_debug=False, timeout_init=30, max_attempts=3,
-                       max_workers=1, exclude_albums=[], download_path=str(OUT))
 
 
 def safe(value):

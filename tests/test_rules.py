@@ -229,8 +229,7 @@ class BytePreservation(unittest.TestCase):
         session.album_map = {key[0]: item['album']}
         response = Mock(content=payload, headers={'Content-Type': 'image/gif'})
         with tempfile.TemporaryDirectory() as temp, patch.object(migration, 'OUT', Path(temp).resolve()), \
-                patch.object(migration.core, 'download_photo_network_helper', return_value=response) as network, \
-                patch.object(migration.core.piexif, 'insert', side_effect=AssertionError('Original metadata write')):
+                patch.object(migration.core, 'download_photo_network_helper', return_value=response) as network:
             request = [{'album_id': key[0], 'pic_key': key[1]}]
             first = session.download(request, quiet=True)[0]
             original = Path(temp) / first['path']
